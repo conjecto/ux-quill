@@ -1,17 +1,16 @@
 {% block quill_widget %}
-    {%- set controller_name = (attr['data-controller']|default('') ~ ' ehyiah--ux-quill--quill')|trim -%}
+    {% set attr = attr|merge({'data-controller': (attr['data-controller']|default('') ~ ' ehyiah--ux-quill--quill')|trim}) %}
     {% set data_set = "data-ehyiah--ux-quill--quill" %}
     {% set html_sanitizer = attr['sanitizer'] %}
 
     <div class="quill-container"
-         data-controller="{{ controller_name }}"
-         {{ data_set }}-toolbar-options-value="{{ attr['quill_options'] }}"
-         {{ data_set }}-extra-options-value="{{ attr['quill_extra_options'] }}"
+        {{ block('widget_attributes') }}
+        {{ data_set }}-toolbar-options-value="{{ attr['quill_options'] }}"
+        {{ data_set }}-extra-options-value="{{ attr['quill_extra_options'] }}"
     >
         <div>
             <input type="hidden"
                    value="{{ value }}"
-                   {{ block('widget_attributes') }}
                    {{ data_set }}-target="input"
             >
         </div>
